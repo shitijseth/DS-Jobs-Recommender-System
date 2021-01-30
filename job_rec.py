@@ -60,3 +60,12 @@ def cos_similarity_metric(cand, ad):
     ad = np.append(ad, score)
 
     return ad.tolist()
+
+#Funtion to match coach info se
+def match_info(ad):
+  for j in range(len(ads)):
+    val = ad[0]
+    if int(float(val)) == ads[j]['exp']:
+      if ad[1] == ads[j]['skills']:
+        if ad[2] == ads[j]['city']:
+          print(ads[j])
