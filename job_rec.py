@@ -25,7 +25,7 @@ def cos_similarity_metric(cand, ad):
     skill1, skill2 = cand[1], ad[1]
 
 #Calling API for location
-    geolocator = Nominatim(user_agent = "tech4stress")
+    geolocator = Nominatim(user_agent =)
 
 #Getting longitude and latitude for cities
     loc1 = geolocator.geocode(cand[2])
@@ -69,3 +69,21 @@ def match_info(ad):
       if ad[1] == ads[j]['skills']:
         if ad[2] == ads[j]['city']:
           print(ads[j])
+
+#Function to print results
+def print_results(n):
+  print('Best jobs for you are')
+  for k in range(n):
+    match_info(ads_with_scores[k])
+
+def recommend(ads, cand, n):
+    ads_with_scores = []
+#Looping through all coaches and calculating cosine similarity score
+    for i in range(len(ads)):
+      match = cos_similarity_metric(vectorize(cand), vectorize(ads[i]))
+      ads_with_scores.append(match)
+
+#Sorting in descinding order
+    ads_with_scores.sort(key = lambda x: x[3], reverse = True)
+
+    print_results(n)
